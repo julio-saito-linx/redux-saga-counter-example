@@ -5,15 +5,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import {combineReducers} from 'redux-immutable';
+import Immutable from 'immutable';
 // import sagaMonitor from '../../sagaMonitor'
 
 import Counter from './components/Counter'
-import reducer from './reducers'
+
+import {
+  counter,
+  showLoading
+} from './reducers'
+
 import rootSaga from './sagas'
+
+const initialState = Immutable.fromJS({
+  counter: {
+    count: 0,
+  },
+  showLoading: {
+    display: false,
+  }
+});
+
+const rootReducer = combineReducers({counter, showLoading});
 
 const sagaMiddleware = createSagaMiddleware({})
 const store = createStore(
-  reducer,
+  rootReducer,
+  initialState,
   applyMiddleware(sagaMiddleware)
 )
 sagaMiddleware.run(rootSaga)
