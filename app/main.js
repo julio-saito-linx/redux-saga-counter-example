@@ -1,22 +1,20 @@
-/*eslint-disable no-unused-vars*/
-import "babel-polyfill"
+import 'babel-polyfill';
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import {combineReducers} from 'redux-immutable';
 import Immutable from 'immutable';
-// import sagaMonitor from '../../sagaMonitor'
 
-import Counter from './components/Counter'
+import Counter from './components/Counter';
 
 import {
   counter,
   showLoading
-} from './reducers'
+} from './reducers';
 
-import rootSaga from './sagas'
+import rootSaga from './sagas';
 
 const initialState = Immutable.fromJS({
   counter: {
@@ -29,15 +27,15 @@ const initialState = Immutable.fromJS({
 
 const rootReducer = combineReducers({counter, showLoading});
 
-const sagaMiddleware = createSagaMiddleware({})
+const sagaMiddleware = createSagaMiddleware({});
 const store = createStore(
   rootReducer,
   initialState,
   applyMiddleware(sagaMiddleware)
-)
-sagaMiddleware.run(rootSaga)
+);
+sagaMiddleware.run(rootSaga);
 
-const action = type => store.dispatch({type})
+const action = type => store.dispatch({type});
 
 function render() {
   ReactDOM.render(
@@ -46,10 +44,11 @@ function render() {
       onIncrement={() => action('INCREMENT')}
       onDecrement={() => action('DECREMENT')}
       onIncrementIfOdd={() => action('INCREMENT_IF_ODD')}
-      onIncrementAsync={() => action('INCREMENT_ASYNC')} />,
+      onIncrementAsync={() => action('INCREMENT_ASYNC')}
+    />,
     document.getElementById('root')
-  )
+  );
 }
 
-render()
-store.subscribe(render)
+render();
+store.subscribe(render);

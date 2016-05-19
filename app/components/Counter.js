@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 const renderWait = (display) => {
   if (display) {
@@ -52,7 +50,7 @@ const Counter = ({ state, onIncrement, onDecrement, onIncrementIfOdd, onIncremen
 
       </p>
       <h1>
-        Counter: {jsState.counter.count}
+        Counter : {jsState.counter.count}
       </h1>
 
       {renderWait(jsState.showLoading.display)}

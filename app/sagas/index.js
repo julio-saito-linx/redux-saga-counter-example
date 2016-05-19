@@ -1,8 +1,6 @@
-/* eslint-disable no-constant-condition */
-
-import { takeEvery } from 'redux-saga'
-import { put, call } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
+import { takeEvery } from 'redux-saga';
+import { put, call } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 
 export function* incrementAsync() {
   yield put({type: 'SHOW_LOADING'});
@@ -12,5 +10,5 @@ export function* incrementAsync() {
 }
 
 export default function* rootSaga() {
-  yield* takeEvery('INCREMENT_ASYNC', incrementAsync)
+  yield* takeEvery('INCREMENT_ASYNC', incrementAsync);
 }
