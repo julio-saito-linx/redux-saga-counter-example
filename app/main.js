@@ -41,6 +41,7 @@ function render() {
   ReactDOM.render(
     <Counter
       state={store.getState()}
+      onReset={() => action('RESET')}
       onIncrement={() => action('INCREMENT')}
       onDecrement={() => action('DECREMENT')}
       onIncrementIfOdd={() => action('INCREMENT_IF_ODD')}

@@ -1,6 +1,9 @@
 export function counter(state, action) {
   switch (action.type) {
 
+  case 'RESET':
+    return state.set('count', 0);
+
   case 'INCREMENT':
     return state.set('count', state.get('count') + 1);
 

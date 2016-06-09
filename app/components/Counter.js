@@ -1,71 +1,85 @@
 import React, { PropTypes } from 'react';
+import styles from './styles';
 
 const renderWait = (display) => {
   if (display) {
-    return <span>loading...</span>;
+    return <span>(loading...)</span>;
   }
   return null;
 };
 
-const styles = {
-  bigButton: {
-    fontSize: 20,
-    margin: 10,
-  }
-};
-
-const Counter = ({ state, onIncrement, onDecrement, onIncrementIfOdd, onIncrementAsync }) => {
+const Counter = ({
+  state,
+  onReset,
+  onIncrement,
+  onDecrement,
+  onIncrementIfOdd,
+  onIncrementAsync,
+}) => {
   const jsState = state.toJS();
   return (
     <div>
-      <p>
+      <div style={styles.container}>
         <button
           style={styles.bigButton}
-          onClick={onIncrement}
+          onClick={onReset}
         >
-          PLUS 1
+          RESET
         </button>
 
         <button
           style={styles.bigButton}
           onClick={onDecrement}
         >
-          MINUS 1
+          -
+        </button>
+
+        <button
+          style={styles.bigButton}
+          onClick={onIncrement}
+        >
+          +
         </button>
 
         <button
           style={styles.bigButton}
           onClick={onIncrementIfOdd}
         >
-          PLUS 1 (if odd)
+          + (if odd)
         </button>
 
         <button
           style={styles.bigButton}
           onClick={onIncrementAsync}
         >
-          PLUS 1 (async)
+          + (async)
         </button>
+      </div>
 
+      <div style={styles.container}>
+        <div style={styles.containerResults}>
+          {renderWait(jsState.showLoading.display)}
+          <h1 style={styles.resultTitle}>
+            Counter : {jsState.counter.count}
+          </h1>
+          {renderWait(jsState.showLoading.display)}
+        </div>
+      </div>
 
-      </p>
-      <h1>
-        Counter : {jsState.counter.count}
-      </h1>
-
-      {renderWait(jsState.showLoading.display)}
-
-      <br />
-      <pre>
-        jsState:
-        {JSON.stringify(jsState, null, 2)}
-      </pre>
+      <div style={styles.containerPre}>
+        <pre>
+          jsState:
+          {JSON.stringify(jsState,
+           null, 2)}
+        </pre>
+      </div>
     </div>
   );
 };
 
 Counter.propTypes = {
   state: PropTypes.object.isRequired,
+  onReset: PropTypes.func.isRequired,
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired,
   onIncrementIfOdd: PropTypes.func.isRequired,
